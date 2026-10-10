@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox 2016 Revival Dashboard</title>
+    <style>
+        :root {
+            --bg-color: #0b141d;
+            --card-bg: #152232;
+            --accent: #00a2ff;
+            --accent-green: #00b06f;
+            --text-color: #e2e8f0;
+            --text-muted: #8c9ba5;
+            --border-color: #273b4e;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #0d1b2a;
+            border-bottom: 2px solid var(--border-color);
+            padding: 16px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            background: #e11d48;
+            color: white;
+            font-size: 13px;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .container {
+            max-width: 1050px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a5f 0%, #112233 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+
+        .hero h1 {
+            margin-top: 0;
+            font-size: 28px;
+            color: #fff;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .user-panel {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .user-stats {
+            display: flex;
+            gap: 20px;
+            font-weight: 600;
+        }
+
+        .stat-badge {
+            background: #0f172a;
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid #334155;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 162, 255, 0.2);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 160px;
+            background: #203348 url('https://tr.rbxcdn.com/f04c64bf2528751db433f7aa3f1dff44/420/420/Image/Png') center/cover no-repeat;
+            display: flex;
+            align-items: flex-end;
+            padding: 10px;
+            box-sizing: border-box;
+            background-color: #213547;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 19px;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+            color: #fff;
+        }
+
+        .card-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 18px;
+            min-height: 40px;
+        }
+
+        .btn {
+            display: block;
+            text-align: center;
+            padding: 12px 18px;
+            border-radius: 6px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: 0.2s;
+        }
+
+        .btn-play {
+            background: var(--accent-green);
+            color: white;
+            font-size: 16px;
+        }
+
+        .btn-play:hover {
+            background: #00935c;
+        }
+
+        .modal-form {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        input {
+            background: #09131d;
+            border: 1px solid var(--border-color);
+            color: white;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 14px;
+            flex: 1;
+        }
+
+        .auth-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-auth {
+            background: var(--accent);
+            color: white;
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            🕹️ ROBLOX <span>2016 REVIVAL</span>
+        </div>
+        <div id="authHeader" class="auth-container">
+            <input type="text" id="userInput" placeholder="Username (es. Player1)" style="width: 150px;">
+            <input type="password" id="passInput" placeholder="Password" style="width: 120px;">
+            <button class="btn btn-auth" onclick="login()">Login</button>
+            <button class="btn btn-auth" style="background: #475569;" onclick="register()">Registrati</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="hero">
+            <h1>Server Privato Roblox 2016</h1>
+            <p>Benvenuto nella dashboard del tuo revival di Roblox. Da qui puoi vedere i giochi disponibili, collegare il client Roblox del 2016 e iniziare a giocare nei tuoi server cloud o locali.</p>
+            <div id="joinInstructions" style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; font-size: 13px;">
+                💡 <b>Per Giocare:</b> Clicca su "GIOCA" sul posto desiderato oppure copia l'indirizzo dello script per configurare il tuo launcher 2016!
+            </div>
+        </div>
+
+        <div class="user-panel" id="userPanel" style="display: none;">
+            <div>Connesso come: <strong id="loggedUsername" style="color: #38bdf8;"></strong></div>
+            <div class="user-stats">
+                <div class="stat-badge">💰 Robux: <span id="userRobux">100</span></div>
+                <div class="stat-badge">🎟️ Tickets: <span id="userTix">500</span></div>
+                <div class="stat-badge">⭐ <span id="userBc">BuildersClub</span></div>
+            </div>
+        </div>
+
+        <h2 style="margin-bottom: 20px; font-size: 22px;">🎮 Giochi & Mappe Attive</h2>
+        <div class="grid" id="placesGrid">
+            <!-- Mappe caricate dinamicamente via JS -->
+        </div>
+    </div>
+
+    <script>
+        async function checkUser() {
+            try {
+                const res = await fetch('/api/currentUser');
+                const data = await res.json();
+                if (data.loggedIn) {
+                    document.getElementById('authHeader').innerHTML = `
+                        <span style="font-weight: bold; color: #38bdf8;">👋 Ciao, ${data.user.username}!</span>
+                    `;
+                    document.getElementById('userPanel').style.display = 'flex';
+                    document.getElementById('loggedUsername').innerText = data.user.username;
+                    document.getElementById('userRobux').innerText = data.user.robux;
+                    document.getElementById('userTix').innerText = data.user.tix;
+                    document.getElementById('userBc').innerText = data.user.membership;
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        async function login() {
+            const username = document.getElementById('userInput').value;
+            const password = document.getElementById('passInput').value;
+            const res = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+            const data = await res.json();
+            if (data.success) {
+                location.reload();
+            } else {
+                alert(data.error || 'Errore nel login');
+            }
+        }
+
+        async function register() {
+            const username = document.getElementById('userInput').value;
+            const password = document.getElementById('passInput').value;
+            const res = await fetch('/api/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+            const data = await res.json();
+            if (data.success) {
+                alert('Account creato con successo! Ora sei connesso.');
+                location.reload();
+            } else {
+                alert(data.error || 'Errore nella registrazione');
+            }
+        }
+
+        async function loadPlaces() {
+            const res = await fetch('/api/places');
+            const places = await res.json();
+            const grid = document.getElementById('placesGrid');
+            grid.innerHTML = '';
+
+            places.forEach(p => {
+                grid.innerHTML += `
+                    <div class="card">
+                        <div class="card-img"></div>
+                        <div class="card-content">
+                            <h3 class="card-title">${p.name}</h3>
+                            <p class="card-desc">${p.description || 'Nessuna descrizione specificata.'}</p>
+                            <a href="/launch/${p.id}" class="btn btn-play">▶ GIOCA ORA</a>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        checkUser();
+        loadPlaces();
+    </script>
+</body>
+</html>
